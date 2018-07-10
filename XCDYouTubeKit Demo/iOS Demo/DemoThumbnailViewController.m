@@ -20,17 +20,21 @@
 {
 	NSString *videoIdentifier = [[NSUserDefaults standardUserDefaults] objectForKey:@"VideoIdentifier"];
 	self.videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:videoIdentifier];
-	self.videoPlayerViewController.moviePlayer.backgroundPlaybackEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"PlayVideoInBackground"];
+	//self.videoPlayerViewController.moviePlayer.backgroundPlaybackEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"PlayVideoInBackground"];
 	
 	NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
 	[defaultCenter addObserver:self selector:@selector(videoPlayerViewControllerDidReceiveVideo:) name:XCDYouTubeVideoPlayerViewControllerDidReceiveVideoNotification object:self.videoPlayerViewController];
-	[defaultCenter addObserver:self selector:@selector(moviePlayerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.videoPlayerViewController.moviePlayer];
+	//[defaultCenter addObserver:self selector:@selector(moviePlayerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.videoPlayerViewController.moviePlayer];
 }
 
 - (IBAction) play:(id)sender
 {
-	[self.videoPlayerViewController presentInView:self.videoContainerView];
-	[self.videoPlayerViewController.moviePlayer play];
+	[self addChildViewController:self.videoPlayerViewController];
+	self.videoPlayerViewController.view.bounds = self.videoContainerView.bounds;
+	[self.videoContainerView addSubview:self.videoPlayerViewController.view];
+	[self.videoPlayerViewController didMoveToParentViewController:self];
+	
+	[self.videoPlayerViewController.player play];
 }
 
 #pragma mark - Notifications

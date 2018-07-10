@@ -23,7 +23,7 @@
 	[[NSUserDefaults standardUserDefaults] setObject:apiKey forKey:@"YouTubeAPIKey"];
 	
 	XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [XCDYouTubeVideoPlayerViewController new];
-	videoPlayerViewController.moviePlayer.backgroundPlaybackEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"PlayVideoInBackground"];
+	//videoPlayerViewController.moviePlayer.backgroundPlaybackEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"PlayVideoInBackground"];
 	[self presentMoviePlayerViewControllerAnimated:videoPlayerViewController];
 	
 	// https://developers.google.com/youtube/v3/docs/videos/list
@@ -32,7 +32,7 @@
 	{
 		id json = [NSJSONSerialization JSONObjectWithData:data ?: [NSData new] options:0 error:NULL];
 		NSString *videoIdentifier = [[[json valueForKeyPath:@"items.id"] firstObject] description];
-		videoPlayerViewController.videoIdentifier = videoIdentifier;
+		//videoPlayerViewController.videoIdentifier = videoIdentifier;
 	}];
 }
 

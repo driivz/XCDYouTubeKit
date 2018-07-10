@@ -36,19 +36,19 @@
 {
 	XCDYouTubeVideo *video = notification.userInfo[XCDYouTubeVideoUserInfoKey];
 	NSString *title = video.title;
-	if (title)
-		[MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = @{ MPMediaItemPropertyTitle: title };
-	
-	[NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:video.mediumThumbnailURL] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
-	{
-		if (data)
-		{
-			UIImage *image = [UIImage imageWithData:data];
-			MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
-			if (title && artwork)
-				[MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = @{ MPMediaItemPropertyTitle: title, MPMediaItemPropertyArtwork: artwork };
-		}
-	}];
+//	if (title)
+//		[MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = @{ MPMediaItemPropertyTitle: title };
+//	
+//	[NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:video.mediumThumbnailURL] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+//	{
+//		if (data)
+//		{
+//			UIImage *image = [UIImage imageWithData:data];
+//			MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+//			if (title && artwork)
+//				[MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = @{ MPMediaItemPropertyTitle: title, MPMediaItemPropertyArtwork: artwork };
+//		}
+//	}];
 }
 
 @end
